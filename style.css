@@ -1,0 +1,16 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+<<<<<<< HEAD
+  margin: 50px auto;
+=======
+  margin: 100px auto;
+>>>>>>> f83c24e8f7a2e25bfe431661412be16a2c1132a1
+  /* top left bottom right */
+
+
+}
