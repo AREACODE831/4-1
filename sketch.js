@@ -8,14 +8,17 @@ let w = 600;
 let h = 600;
 let player;
 let coins = [];
+let enemies = [];
 //let bg;
 let playerImg;
 let coinImg;
+let enemyImg;
 
 
 function preload() {
   playerImg = loadImage('asset/r.png');
   coinImg = loadImage('asset/hole.jpg');
+  enemyImg = loadImage('asset/e.png');
 }
 
 
@@ -31,6 +34,7 @@ function setup() {
 
   //coins[0] = new Coin();
   coins.push(new Coin());
+  enemies.push(new Enemy());
 }
 
 function draw() {
@@ -127,6 +131,9 @@ function level1() {
 
   if (random(1) <= 0.01) {
     coins.push(new Coin());
+  }
+  if (random(1) <= 0.04) {
+    enemies.push(new Enemy());
   }
 
   player.display();
