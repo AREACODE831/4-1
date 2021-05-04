@@ -3,7 +3,8 @@
 
 let state = 'title';
 let cnv;
-let points = 0;
+let points = 1;
+let lives = 3;
 let w = 600;
 let h = 600;
 let player;
@@ -52,6 +53,10 @@ function draw() {
     case 'you win':
       youWin();
       cnv.mouseClicked(youWinMouseClicked);
+      break;
+    case 'game over':
+      gameOver();
+      cnv.mouseClicked(gameOverMouseClicked);
       break;
     default:
       break;
@@ -132,7 +137,7 @@ function level1() {
   if (random(1) <= 0.01) {
     coins.push(new Coin());
   }
-  if (random(1) <= 0.04) {
+  if (random(1) <= 0.02) {
     enemies.push(new Enemy());
   }
 
@@ -147,6 +152,11 @@ function level1() {
   for (let i = 0; i < coins.length; i++) {
     coins[i].display();
     coins[i].move();
+  }
+
+  for (let i = 0; i < enemies.length; i++) {
+    enemies[i].display();
+    enemies[i].move();
   }
 
   //using foreach loop
@@ -176,7 +186,27 @@ function level1() {
     }
   }
 
+  //enemies
+  for (let i = enemies.length - 1; i >= 0; i--) {
+    if (dist(player.x, player.y, enemies[i].x, enemies[i].y) <= (player.r + enemies[i].r) / 2) {
+      points--;
+      console.log(points);
+      enemies.splice(i, 1);
+    } else if (enemies[i].y > h) {
+      enemies.splice(i, 1);
+      //console.log('enemies is out of town');
+
+    }
+  }
+
   text(`pOiNtS: ${points}`, w / 7, h / 15);
+
+//check point values to win or lose the game.
+  if (points >= 2){
+    state = 'you win';
+  } else if (points <= 0){
+    state = 'game over';
+  }
 
 }
 
@@ -194,16 +224,52 @@ function level1MouseClicked() {
 
 function youWin() {
   background(206, 75, 242);
-  textSize(80);
+  textSize(50);
   textFont('Futura');
   stroke(255);
-  text('You save the Alice', w / 2, h / 2);
+  text('Hello, Alice.', w / 2, h / 2);
 
   textSize(30);
   text('click anywhere to restart!', w / 2, h * 3 / 4);
 }
 
 function youWinMouseClicked() {
+  state = 'title';
+  points = 1;
+}
+
+function gameOver() {
+
+  background(206, 75, 242);
+  textSize(50);
+  textFont('Futura');
+  stroke(255);
+
+  //check number of lives
+  if (lives >= 0){
+    //if you have a life, you lose one.
+    // text(lives + ' lives left', w / 2, h / 2);
+    // text(lives + ' lives left', w / 2, h / 2);
+    text(`lives left: ${lives}`, w /2, h / 2);
+    textSize(20);
+    text('continue? click anywhere.', w / 2, h * 3 / 4);
+  } else {
+    //game over
+    text('Go back to the reality.', w / 2, h / 2);
+    textSize(20);
+    text('click anywhere to restart!', w / 2, h * 3 / 4);
+  }
+
+}
+
+function gameOverMouseClicked(){
+  if (lives >= 0){ //this means they have 0 lives going into it.
+  lives--;
   state = 'level 1';
-  points = 0;
+
+} else {
+  state = 'title';
+}
+  points = 1;
+
 }

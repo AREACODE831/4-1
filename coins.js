@@ -11,14 +11,8 @@ class Coin {
 
   }
   display(){
-    push();
-    //fill(0);
     //ellipse(this.x, this.y, this.r, this.r);
     image(coinImg, this.x, this.y, this.r, this.r);
-  //  pop();
-    //fill(0);
-    //ellipse(this.x, this.y, this.r, this.r);
-    //pop();
     // image(this.img1, this.x, this.x, this.r, this.r);
   }
 

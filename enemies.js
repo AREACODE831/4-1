@@ -4,7 +4,7 @@ class Enemy {
     this.r = 50;
     this.x = random(w);
     this.y = 0 - this.r;
-    this.speed = 7;
+    this.speed = 4;
     // this.r = 60;
     // this.x = random(w);
     // this.y = h - this.r;
@@ -12,20 +12,15 @@ class Enemy {
 
   }
   display(){
-    push();
     //fill(0);
     //ellipse(this.x, this.y, this.r, this.r);
-    image(enemyImg, this.x, this.y, this.r, this.r);
-  //  pop();
+    image(enemyImg, this.x, this.y, this.r*2, this.r*2);
 
-    //fill(0);
-    //ellipse(this.x, this.y, this.r, this.r);
-    //pop();
-    // image(this.img1, this.x, this.x, this.r, this.r);
   }
 
   move(){
-    this.y++;
+      // this.y++;
+      this.y += this.speed;
 
   }
 }
