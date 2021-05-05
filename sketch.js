@@ -46,7 +46,7 @@ function setup() {
 }
 
 function draw() {
-//background(bgImg);
+  //background(bgImg);
 
   switch (state) {
     case 'title':
@@ -113,15 +113,15 @@ function keyReleased() {
     numberKeysPressed++;
   }
   console.log(numberKeysPressed);
-  if (numberKeysPressed == 0){
-  player.direction = 'still';
-}
+  if (numberKeysPressed == 0) {
+    player.direction = 'still';
+  }
 }
 
 function title() {
   background(147, 103, 255);
   textSize(80);
-  textFont('monospace');
+  textFont('Girassol');
   fill(255);
   textAlign(CENTER);
   //text('Rabbit Hole', w / 2, h / 5);
@@ -140,7 +140,7 @@ function level1() {
   background(107, 242, 217);
   //text('click for points', w/2, h - 30);
 
-//frequency of coin droping
+  //frequency of coin droping
 
   if (random(1) <= 0.01) {
     coins.push(new Coin());
@@ -229,10 +229,10 @@ function level1() {
 
   text(`pOiNtS: ${points}`, w / 7, h / 15);
 
-//check point values to win or lose the game.
-  if (points >= 7){
+  //check point values to win or lose the game.
+  if (points >= 7) {
     state = 'you win';
-  } else if (points <= -1){
+  } else if (points <= -1) {
     state = 'game over';
   }
 
@@ -253,11 +253,11 @@ function level1MouseClicked() {
 function youWin() {
   background(255, 126, 177);
   textSize(50);
-  textFont('Futura');
+  textFont('Girassol');
   stroke(255);
   text('Hello, Alice.', w / 2, h / 2);
-textSize(30);
-text('where have you been?', w / 2, h * 3 / 5);
+  textSize(30);
+  text('where have you been?', w / 2, h * 3 / 5);
   textSize(15);
   text('click anywhere to restart!', w / 2, h * 3 / 4);
 
@@ -270,17 +270,17 @@ function youWinMouseClicked() {
 
 function gameOver() {
 
-  background( 107, 215, 255);
+  background(107, 215, 255);
   textSize(50);
-  textFont('Futura');
+  textFont('Girassol');
   stroke(255);
 
   //check number of lives
-  if (lives >= 0){
+  if (lives >= 0) {
     //if you have a life, you lose one.
     // text(lives + ' lives left', w / 2, h / 2);
     // text(lives + ' lives left', w / 2, h / 2);
-    text(`lives left: ${lives}`, w /2, h / 2);
+    text(`lives left: ${lives}`, w / 2, h / 2);
     textSize(20);
     text('continue? click anywhere.', w / 2, h * 3 / 4);
   } else {
@@ -293,14 +293,14 @@ function gameOver() {
 
 }
 
-function gameOverMouseClicked(){
-  if (lives >= 0){ //this means they have 0 lives going into it.
-  lives--;
-  state = 'level 1';
+function gameOverMouseClicked() {
+  if (lives >= 0) { //this means they have 0 lives going into it.
+    lives--;
+    state = 'level 1';
 
-} else {
-  state = 'title';
-}
+  } else {
+    state = 'title';
+  }
   points = 1;
 
 }
