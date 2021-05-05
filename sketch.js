@@ -19,7 +19,7 @@ let titleImg;
 
 function preload() {
   playerImg = loadImage('asset/r.png');
-  coinImg = loadImage('asset/hole.jpg');
+  coinImg = loadImage('asset/hole.png');
   enemyImg = loadImage('asset/e.png');
   titleImg = loadImage('asset/title.png');
 }
@@ -114,16 +114,16 @@ function keyReleased() {
 }
 
 function title() {
-  background(184, 119, 232);
+  background(147, 103, 255);
   textSize(80);
-  textFont('Futura');
+  textFont('monospace');
   fill(255);
   textAlign(CENTER);
-  text('Rabbit Hole', w / 2, h / 5);
-  //image(titleImg, w / 2, h / 5);
+  //text('Rabbit Hole', w / 2, h / 5);
+  image(titleImg, w / 2, h / 3, 300, 250);
 
   textSize(30);
-  text('click anywhere to start!', w / 2, h / 2);
+  text('click anywhere to start!', w / 2, h / 1.1);
 }
 
 function titleMouseClicked() {
@@ -205,9 +205,9 @@ function level1() {
   text(`pOiNtS: ${points}`, w / 7, h / 15);
 
 //check point values to win or lose the game.
-  if (points >= 2){
+  if (points >= 7){
     state = 'you win';
-  } else if (points <= 0){
+  } else if (points <= -1){
     state = 'game over';
   }
 
@@ -226,7 +226,7 @@ function level1MouseClicked() {
 }
 
 function youWin() {
-  background(206, 75, 242);
+  background(255, 126, 177);
   textSize(50);
   textFont('Futura');
   stroke(255);
@@ -243,7 +243,7 @@ function youWinMouseClicked() {
 
 function gameOver() {
 
-  background(206, 75, 242);
+  background( 107, 215, 255);
   textSize(50);
   textFont('Futura');
   stroke(255);

@@ -12,7 +12,7 @@ class Coin {
   }
   display(){
     //ellipse(this.x, this.y, this.r, this.r);
-    image(coinImg, this.x, this.y, this.r, this.r);
+    image(coinImg, this.x, this.y, this.r*2, this.r*2);
     // image(this.img1, this.x, this.x, this.r, this.r);
   }
 
