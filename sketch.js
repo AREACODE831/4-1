@@ -4,17 +4,19 @@
 let state = 'title';
 let cnv;
 let points = 1;
-let lives = 3;
+let lives = 1;
 let w = 600;
 let h = 600;
 let player;
 let coins = [];
 let enemies = [];
-//let bg;
+let fails = [];
+//let bgImg;
 let playerImg;
 let coinImg;
 let enemyImg;
 let titleImg;
+let failImg;
 
 
 function preload() {
@@ -22,12 +24,14 @@ function preload() {
   coinImg = loadImage('asset/hole.png');
   enemyImg = loadImage('asset/e.png');
   titleImg = loadImage('asset/title.png');
+  failImg = loadImage('asset/reco.png');
+  //bgImg = loadImage('asset/bg.png');
 }
 
 
 function setup() {
   cnv = createCanvas(w, h);
-  //bg = loadImage('asset/hole.jpg');
+  //bgImg = loadImage('asset/hole.jpg');
   frameRate(50);
   imageMode(CENTER);
   rectMode(CENTER);
@@ -38,10 +42,11 @@ function setup() {
   //coins[0] = new Coin();
   coins.push(new Coin());
   enemies.push(new Enemy());
+  fails.push(new Fail());
 }
 
 function draw() {
-  //background(bg);
+//background(bgImg);
 
   switch (state) {
     case 'title':
@@ -143,6 +148,9 @@ function level1() {
   if (random(1) <= 0.02) {
     enemies.push(new Enemy());
   }
+  if (random(1) <= 0.02) {
+    fails.push(new Fail());
+  }
 
   player.display();
   player.move();
@@ -160,6 +168,11 @@ function level1() {
   for (let i = 0; i < enemies.length; i++) {
     enemies[i].display();
     enemies[i].move();
+  }
+
+  for (let i = 0; i < fails.length; i++) {
+    fails[i].display();
+    fails[i].move();
   }
 
   //using foreach loop
@@ -192,11 +205,23 @@ function level1() {
   //enemies
   for (let i = enemies.length - 1; i >= 0; i--) {
     if (dist(player.x, player.y, enemies[i].x, enemies[i].y) <= (player.r + enemies[i].r) / 2) {
-      points--;
+      points++;
       console.log(points);
       enemies.splice(i, 1);
     } else if (enemies[i].y > h) {
       enemies.splice(i, 1);
+      //console.log('enemies is out of town');
+
+    }
+  }
+
+  for (let i = fails.length - 1; i >= 0; i--) {
+    if (dist(player.x, player.y, fails[i].x, fails[i].y) <= (player.r + fails[i].r) / 2) {
+      points--;
+      console.log(points);
+      fails.splice(i, 1);
+    } else if (fails[i].y > h) {
+      fails.splice(i, 1);
       //console.log('enemies is out of town');
 
     }
@@ -231,9 +256,11 @@ function youWin() {
   textFont('Futura');
   stroke(255);
   text('Hello, Alice.', w / 2, h / 2);
-
-  textSize(30);
+textSize(30);
+text('where have you been?', w / 2, h * 3 / 5);
+  textSize(15);
   text('click anywhere to restart!', w / 2, h * 3 / 4);
+
 }
 
 function youWinMouseClicked() {
@@ -258,9 +285,10 @@ function gameOver() {
     text('continue? click anywhere.', w / 2, h * 3 / 4);
   } else {
     //game over
-    text('Go back to the reality.', w / 2, h / 2);
     textSize(20);
-    text('click anywhere to restart!', w / 2, h * 3 / 4);
+    text('You are out of this rabbit hole!', w / 2, h / 2);
+    textSize(20);
+    text('click anywhere to find another rabbit hole', w / 2, h * 3 / 4);
   }
 
 }

@@ -1,5 +1,5 @@
 
-class Enemy {
+class Fail {
   constructor(){
     this.r = 50;
     this.x = random(w);
@@ -14,7 +14,7 @@ class Enemy {
   display(){
     //fill(0);
     //ellipse(this.x, this.y, this.r, this.r);
-    image(enemyImg, this.x, this.y, this.r*2, this.r*2);
+    image(failImg, this.x, this.y, this.r*2, this.r*2);
 
   }
 
