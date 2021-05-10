@@ -137,7 +137,8 @@ function titleMouseClicked() {
 }
 
 function level1() {
-  background(107, 242, 217);
+   background(107, 242, 217);
+
   //text('click for points', w/2, h - 30);
 
   //frequency of coin droping
@@ -285,7 +286,7 @@ function gameOver() {
     text('continue? click anywhere.', w / 2, h * 3 / 4);
   } else {
     //game over
-    textSize(20);
+    textSize(25);
     text('You are out of this rabbit hole!', w / 2, h / 2);
     textSize(20);
     text('click anywhere to find another rabbit hole', w / 2, h * 3 / 4);
