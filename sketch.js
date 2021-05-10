@@ -265,15 +265,15 @@ function level1() {
   }
 
   if (points > 3) {
-    gameBgc = color(240, 240, 100);
+    gameBgc = color(138, 214, 232);
     // lvlInt = 2;
   }
   if (points >5) {
-    gameBgc = color(240, 170, 50);
+    gameBgc = color( 164, 190, 255);
     // lvlInt = 4;
   }
   if (points >7) {
-    gameBgc = color(240, 0, 0);
+    gameBgc = color(154, 129, 232);
     // lvlInt = 8;
   }
 
@@ -340,7 +340,7 @@ function gameBg() {
   fill(255);
   textSize(25);
   textAlign(CENTER);
-  text('Choose what you like!', width*0.5, height*0.1);
+  text('Choose obstacle that you prefer!', width*0.5, height*0.4);
   // imageMode(CENTER);
   pop()
 }
