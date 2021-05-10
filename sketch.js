@@ -11,12 +11,16 @@ let player;
 let coins = [];
 let enemies = [];
 let fails = [];
+let safes = [];
 //let bgImg;
 let playerImg;
 let coinImg;
 let enemyImg;
 let titleImg;
 let failImg;
+let safeImg;
+let gameBgc;
+
 
 
 function preload() {
@@ -25,6 +29,7 @@ function preload() {
   enemyImg = loadImage('asset/e.png');
   titleImg = loadImage('asset/title.png');
   failImg = loadImage('asset/reco.png');
+  safeImg = loadImage('asset/cha.png');
   //bgImg = loadImage('asset/bg.png');
 }
 
@@ -32,6 +37,8 @@ function preload() {
 function setup() {
   cnv = createCanvas(w, h);
   //bgImg = loadImage('asset/hole.jpg');
+  gameBgc = color(107, 242, 217);
+
   frameRate(50);
   imageMode(CENTER);
   rectMode(CENTER);
@@ -43,6 +50,8 @@ function setup() {
   coins.push(new Coin());
   enemies.push(new Enemy());
   fails.push(new Fail());
+  safes.push(new Safe());
+
 }
 
 function draw() {
@@ -137,8 +146,8 @@ function titleMouseClicked() {
 }
 
 function level1() {
-   background(107, 242, 217);
-
+  // background(107, 242, 217);
+  gameBg()
   //text('click for points', w/2, h - 30);
 
   //frequency of coin droping
@@ -151,6 +160,9 @@ function level1() {
   }
   if (random(1) <= 0.02) {
     fails.push(new Fail());
+  }
+  if (random(1) <= 0.02) {
+    safes.push(new Safe());
   }
 
   player.display();
@@ -174,6 +186,10 @@ function level1() {
   for (let i = 0; i < fails.length; i++) {
     fails[i].display();
     fails[i].move();
+  }
+  for (let i = 0; i < safes.length; i++) {
+    safes[i].display();
+    safes[i].move();
   }
 
   //using foreach loop
@@ -227,14 +243,38 @@ function level1() {
 
     }
   }
+  for (let i = safes.length - 1; i >= 0; i--) {
+    if (dist(player.x, player.y, safes[i].x, safes[i].y) <= (player.r + safes[i].r) / 2) {
+      points++;
+      console.log(points);
+      safes.splice(i, 1);
+    } else if (safes[i].y > h) {
+      safes.splice(i, 1);
+      //console.log('enemies is out of town');
+
+    }
+  }
 
   text(`pOiNtS: ${points}`, w / 7, h / 15);
 
   //check point values to win or lose the game.
-  if (points >= 7) {
+  if (points >= 10) {
     state = 'you win';
-  } else if (points <= -1) {
+  } else if (points <= -3) {
     state = 'game over';
+  }
+
+  if (points > 3) {
+    gameBgc = color(240, 240, 100);
+    // lvlInt = 2;
+  }
+  if (points >5) {
+    gameBgc = color(240, 170, 50);
+    // lvlInt = 4;
+  }
+  if (points >7) {
+    gameBgc = color(240, 0, 0);
+    // lvlInt = 8;
   }
 
 }
@@ -258,7 +298,7 @@ function youWin() {
   stroke(255);
   text('Hello, Alice.', w / 2, h / 2);
   textSize(30);
-  text('where have you been?', w / 2, h * 3 / 5);
+  text('welcome to Wonderland!', w / 2, h * 3 / 5);
   textSize(15);
   text('click anywhere to restart!', w / 2, h * 3 / 4);
 
@@ -281,7 +321,7 @@ function gameOver() {
     //if you have a life, you lose one.
     // text(lives + ' lives left', w / 2, h / 2);
     // text(lives + ' lives left', w / 2, h / 2);
-    text(`lives left: ${lives}`, w / 2, h / 2);
+    text(`Attempt left: ${lives}`, w / 2, h / 2);
     textSize(20);
     text('continue? click anywhere.', w / 2, h * 3 / 4);
   } else {
@@ -293,6 +333,18 @@ function gameOver() {
   }
 
 }
+function gameBg() {
+  push()
+  background(gameBgc);
+  stroke(0);
+  fill(255);
+  textSize(25);
+  textAlign(CENTER);
+  text('Choose what you like!', width*0.5, height*0.1);
+  // imageMode(CENTER);
+  pop()
+}
+
 
 function gameOverMouseClicked() {
   if (lives >= 0) { //this means they have 0 lives going into it.
