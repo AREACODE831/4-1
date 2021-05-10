@@ -20,6 +20,7 @@ let titleImg;
 let failImg;
 let safeImg;
 let gameBgc;
+let introImg;
 
 
 
@@ -30,6 +31,7 @@ function preload() {
   titleImg = loadImage('asset/title.png');
   failImg = loadImage('asset/reco.png');
   safeImg = loadImage('asset/cha.png');
+  introImg = loadImage('asset/intro.png');
   //bgImg = loadImage('asset/bg.png');
 }
 
@@ -135,9 +137,10 @@ function title() {
   textAlign(CENTER);
   //text('Rabbit Hole', w / 2, h / 5);
   image(titleImg, w / 2, h / 3, 300, 250);
+  image(introImg, w / 4, h / 1.2, 300, 250);
 
   textSize(30);
-  text('click anywhere to start!', w / 2, h / 1.1);
+  //text('click anywhere to start!', w / 2, h / 1.05);
 }
 
 function titleMouseClicked() {
@@ -298,7 +301,7 @@ function youWin() {
   stroke(255);
   text('Hello, Alice.', w / 2, h / 2);
   textSize(30);
-  text('welcome to Wonderland!', w / 2, h * 3 / 5);
+  text('where have you been?', w / 2, h * 3 / 5);
   textSize(15);
   text('click anywhere to restart!', w / 2, h * 3 / 4);
 
@@ -340,7 +343,7 @@ function gameBg() {
   fill(255);
   textSize(25);
   textAlign(CENTER);
-  text('Choose obstacle that you prefer!', width*0.5, height*0.4);
+  text('Choose life obstacle that you prefer!', width*0.5, height*0.4);
   // imageMode(CENTER);
   pop()
 }
